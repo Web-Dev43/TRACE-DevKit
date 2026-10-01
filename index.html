@@ -3,149 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TRACE DEVKIT</title>
+<title>TRACE BUILDER</title>
 <style>
-:root{--bg:#071016;--panel:#0c151b;--panel2:#101c23;--border:#263944;--text:#dce8ee;--muted:#8ea5af;--accent:#8fd3b6;--danger:#d88d8d}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
-main{width:min(1100px,100%);margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.brand{font-weight:800;letter-spacing:.16em;font-size:24px}.sub{color:var(--muted);font-size:13px;margin-top:4px}
-.tabs{display:flex;gap:6px;overflow:auto;margin:18px 0 12px}.tab,button{border:1px solid #415762;background:#14232b;color:#fff;border-radius:8px;padding:10px 13px;font:inherit;cursor:pointer}.tab.active{background:#203a42;border-color:#67818b}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}label{display:block;font-size:12px;color:var(--muted)}input,select,textarea{width:100%;margin-top:6px;background:#081218;color:#fff;border:1px solid #31434c;border-radius:7px;padding:10px;font:inherit}textarea{min-height:170px;font-family:ui-monospace,SFMono-Regular,monospace;resize:vertical}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.primary{border-color:#668c7d;background:#19332d}.danger{border-color:#815b5b}.muted{color:var(--muted);font-size:13px}.hidden{display:none!important}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px}.event{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px}.event h3{margin:0 0 5px;font-size:15px}.pill{display:inline-block;border:1px solid #3b515b;border-radius:999px;padding:3px 7px;font-size:11px;color:var(--muted);margin:2px}.ok{color:var(--accent)}.warn{color:#e0b77e}.error{color:var(--danger)}.flow{display:flex;gap:8px;overflow:auto;padding:8px 2px}.node{min-width:150px;background:#101c23;border:1px solid #31434c;border-radius:9px;padding:10px}.arrow{align-self:center;color:var(--muted)}.smallbtn{padding:7px 9px;font-size:12px}.dropzone{border:1px dashed #49606a;border-radius:8px;padding:12px;text-align:center;color:var(--muted);margin-top:10px}.codehint{font:12px ui-monospace,monospace;color:#b7c7cd;white-space:pre-wrap;background:#081218;border:1px solid var(--border);padding:10px;border-radius:8px}
-@media(max-width:600px){main{padding:12px}.grid{grid-template-columns:1fr}.top{display:block}.tabs{margin-top:12px}.panel{padding:12px}}
+:root{--bg:#060b0e;--panel:#0d1519;--panel2:#111d22;--line:#2b3b42;--text:#e5edf0;--muted:#82959d;--accent:#9bd6bd;--bad:#d78989}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}button,input,select,textarea{font:inherit}button{border:1px solid var(--line);background:#152329;color:var(--text);border-radius:8px;padding:10px 13px;cursor:pointer;min-height:44px}button:hover{background:#1c2d34}.primary{background:#1a342d;border-color:#527967}.danger{border-color:#704747}.app{width:min(900px,100%);margin:auto;padding:14px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.logo{font-weight:900;letter-spacing:.18em;font-size:23px}.sub{font-size:12px;color:var(--muted)}.topbuttons{display:flex;gap:6px}.screen{display:none}.screen.active{display:block}.timeline{display:flex;flex-direction:column;gap:8px}.event{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}.num{width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted)}.event b{display:block}.meta{font-size:12px;color:var(--muted);margin-top:3px}.event button{min-height:36px;padding:7px 9px}.add{width:100%;margin-top:10px;border-style:dashed;background:transparent}.preview{background:#071014;border:1px solid var(--line);border-radius:12px;overflow:hidden}.bar{padding:8px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between}.desktop{padding:18px;min-height:330px;position:relative}.fakeapps{display:flex;gap:12px;flex-wrap:wrap}.fakeapp{width:78px;text-align:center;color:#b8c7cc;font-size:12px}.icon{width:58px;height:58px;border:1px solid #33464f;background:#102027;border-radius:13px;display:grid;place-items:center;margin:auto auto 5px;font-size:25px}.notice{position:absolute;right:14px;bottom:14px;width:min(300px,calc(100% - 28px));background:#142229;border:1px solid #48616a;border-radius:9px;padding:10px;font-size:13px}.notice strong{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}.editor{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:12px;color:var(--muted)}input,select,textarea{width:100%;margin-top:5px;background:#081115;color:#fff;border:1px solid #304149;border-radius:7px;padding:10px}textarea{min-height:90px;resize:vertical}.wide{grid-column:1/-1}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.debugrow{padding:10px;border-bottom:1px solid var(--line)}.ok{color:var(--accent)}.bad{color:var(--bad)}.muted{color:var(--muted)}.empty{text-align:center;padding:30px;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.modal{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;padding:14px;z-index:10}.modal.show{display:flex}.modalbox{width:min(560px,100%);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}.modalhead{display:flex;justify-content:space-between;align-items:center}.playlog{margin-top:10px;background:#081115;border:1px solid var(--line);border-radius:9px;padding:10px;min-height:55px;font:12px ui-monospace,monospace}.status{font-size:12px;color:var(--muted);min-height:18px}
+@media(max-width:600px){.app{padding:10px}.head{align-items:flex-start}.topbuttons{width:100%}.topbuttons button{flex:1}.grid{grid-template-columns:1fr}.event{grid-template-columns:32px 1fr}.event>div:last-child{grid-column:2}.desktop{min-height:300px}.notice{position:static;margin-top:30px;width:100%}}
 </style>
 </head>
 <body>
-<main id="app">
-<div class="top"><div><div class="brand">TRACE DEVKIT</div><div class="sub">Build, simulate, debug, and export story logic without hand-editing the main game.</div></div><div id="saveState" class="muted">Local project: ready</div></div>
-<div class="tabs">
-<button class="tab active" data-tab="builder">Builder</button><button class="tab" data-tab="story">Story Flow</button><button class="tab" data-tab="simulate">Simulator</button><button class="tab" data-tab="export">Export</button>
-</div>
+<main class="app" id="app">
+<header class="head"><div><div class="logo">TRACE BUILDER</div><div class="sub">Test the story before it goes into TRACE OS.</div></div><div class="topbuttons"><button data-screen="edit" class="primary">EDIT</button><button data-screen="play">PLAY</button><button data-screen="debug">DEBUG</button></div></header>
 
-<section id="builder" class="view">
-<div class="panel">
-<h2>🧩 Build your story</h2>
-<p class="muted">You only need to answer 5 simple questions. DevKit handles the technical stuff for you.</p>
-<div class="panel" style="background:#081218;margin:12px 0 0">
-<h3>1. What happens?</h3>
-<label><input id="eventId" value="archive_found" maxlength="40" placeholder="Example: A strange file appears"></label>
-</div>
-<div class="grid" style="margin-top:10px">
-<label>2. When does it happen?
-<select id="trigger"><option value="time">After time</option></select>
-<select id="minutes" style="margin-top:7px">
-<option value="0">Right away</option><option value="1">After 1 minute</option><option value="2">After 2 minutes</option><option value="3">After 3 minutes</option><option value="4">After 4 minutes</option><option value="5">After 5 minutes</option><option value="6">After 6 minutes</option><option value="7">After 7 minutes</option><option value="10">After 10 minutes</option>
-</select></label>
-<label>3. Where?
-<select id="appName"><option>Files</option><option>Browser</option><option>TRACE: RUN</option><option>Notes</option><option>Calculator</option><option>System</option></select></label>
-<label>4. What should the player see?
-<input id="notification" placeholder="Example: File activity detected"></label>
-<label>5. What clue does it add?
-<input id="clue" placeholder="Example: The file was not created by you."></label>
-</div>
-<input id="requires" type="hidden">
-<input id="phase" type="hidden" value="1">
-<input id="flag" type="hidden">
-<input id="flagValue" type="hidden" value="true">
-<div class="actions"><button class="primary" id="addEvent">＋ Add story moment</button><button id="clearForm">Clear</button></div>
-</div>
-<div class="panel">
-<h2>📖 Your story <span id="eventCount" class="muted"></span></h2>
-<p class="muted">Add moments above. They automatically get connected in order.</p>
-<div id="events" class="cards"></div>
+<section id="edit" class="screen active">
+<div class="editor">
+<h2 style="margin:0 0 5px">Story timeline</h2><p class="sub">This is only a test. Nothing here changes the real TRACE game.</p>
+<div id="timeline" class="timeline" style="margin-top:12px"></div>
+<button id="add" class="add">＋ Add story moment</button>
 </div>
 </section>
 
-<section id="story" class="view hidden">
-<div class="panel"><h2>Story Flow</h2><p class="muted">Events are connected by requirements. The flow is sorted by time so pacing problems are obvious.</p><div id="flow" class="flow"></div></div>
-<div class="panel"><h2>Checklist</h2><div id="checklist" class="cards"></div></div>
-</section>
-
-<section id="simulate" class="view hidden">
-<div class="panel"><h2>Story Simulator</h2><p class="muted">Run your current sequence locally. One half-second advances 30 story seconds.</p>
-<div class="grid"><label>Start phase<input id="simPhase" type="number" min="0" max="99" value="0"></label><label>Starting minutes<input id="simMinutes" type="number" min="0" max="120" value="0"></label></div>
-<div class="actions"><button class="primary" id="startSim">Start simulation</button><button id="stepSim">Advance 30 sec</button><button id="resetSim">Reset</button></div>
-<p id="simClock" class="ok">00:00</p><div id="simLog" class="panel" style="margin:8px 0 0;background:#081218"></div></div>
-</section>
-
-<section id="export" class="view hidden">
-<div class="panel"><h2>TRACE Export</h2><p class="muted">Generate a drop-in story project for TRACE OS. This output is designed to replace a hand-maintained event list.</p>
-<div class="actions"><button class="primary" id="exportJson">TRACE story.json</button><button id="exportJs">TRACE story.js</button><button id="copyOut">Copy output</button></div>
-<textarea id="output" spellcheck="false"></textarea>
-<div class="codehint">TRACE integration:
-1. Export story.js.
-2. Add the generated file beside app.js.
-3. Load it before app.js.
-4. Call TRACE_STORY_EVENTS from your story engine.
-
-The DevKit keeps story data separate from gameplay code, so story changes stop touching the Tetris/UI systems.</div>
+<section id="play" class="screen">
+<div class="preview">
+<div class="bar"><span>TRACE OS</span><span id="playTime">TEST SESSION</span></div>
+<div class="desktop">
+<div class="fakeapps">
+<div class="fakeapp"><div class="icon">📁</div>Files</div>
+<div class="fakeapp"><div class="icon">🌐</div>Browser</div>
+<div class="fakeapp"><div class="icon">📝</div>Notes</div>
+<div class="fakeapp"><div class="icon">🎮</div>TRACE: RUN</div>
 </div>
-<div class="panel"><h2>Project tools</h2><div class="actions"><button id="saveProject">Save project</button><button id="loadProject">Load saved project</button><button class="danger" id="resetProject">Reset project</button></div><p id="projectStatus" class="muted"></p></div>
+<div id="playNotice" class="notice"><strong>SYSTEM</strong>Press PLAY STORY to begin the test.</div>
+</div>
+</div>
+<div class="actions"><button id="playStory" class="primary">▶ PLAY STORY</button><button id="stopStory">STOP</button><button id="resetTest">RESET TEST</button></div>
+<div id="playLog" class="playlog">Waiting for test...</div>
 </section>
-<div id="toast" class="muted" aria-live="polite"></div>
+
+<section id="debug" class="screen">
+<div class="editor"><h2 style="margin-top:0">🔍 Test results</h2><p class="sub">A quick check for pacing and broken connections.</p><div id="debugList"></div></div>
+</section>
 </main>
+
+<div id="modal" class="modal">
+<div class="modalbox">
+<div class="modalhead"><h2 id="modalTitle" style="margin:0">New story moment</h2><button id="close">×</button></div>
+<div class="grid" style="margin-top:12px">
+<label>What happens?<input id="fTitle" maxlength="60" placeholder="A strange file appears"></label>
+<label>When?
+<select id="fTime"><option value="0">Right away</option><option value="1">After 1 minute</option><option value="2">After 2 minutes</option><option value="3">After 3 minutes</option><option value="4">After 4 minutes</option><option value="5">After 5 minutes</option><option value="6">After 6 minutes</option><option value="7">After 7 minutes</option><option value="10">After 10 minutes</option></select></label>
+<label>Where?
+<select id="fApp"><option>Files</option><option>Browser</option><option>Notes</option><option>Calculator</option><option>TRACE: RUN</option><option>System</option></select></label>
+<label class="wide">What does the player see?<input id="fNotice" placeholder="File activity detected"></label>
+<label class="wide">What clue does it give?<textarea id="fClue" placeholder="The file was not created by you."></textarea></label>
+</div>
+<div class="actions"><button id="saveEvent" class="primary">ADD TO TEST</button><button id="cancel">CANCEL</button></div>
+</div>
+</div>
+
 <script>
 (function(){
-const $=id=>document.getElementById(id),KEY="trace_devkit_project_v2";
-let events=[];
-let sim={minute:0,phase:0,fired:new Set(),running:false,timer:null};
-
-const defaults=[
-{id:"identity",trigger:"manual",minutes:0,app:"System",requires:"",phase:0,notification:"Identity confirmed.",clue:"The session has a named user.",flag:"identitySet",flagValue:"true"},
-{id:"unease_01",trigger:"time",minutes:1,app:"Files",requires:"identity",phase:1,notification:"File activity detected.",clue:"A file appeared without being created.",flag:"uneaseSeen",flagValue:"true"},
-{id:"maya_reference",trigger:"time",minutes:2,app:"Browser",requires:"unease_01",phase:1,notification:"A local record mentions Maya Reyes.",clue:"The name Maya Reyes is linked to TRACE-143207.",flag:"mayaReference",flagValue:"true"},
-{id:"record_mismatch",trigger:"time",minutes:3,app:"Files",requires:"maya_reference",phase:1,notification:"Session record mismatch detected.",clue:"Two sibling records do not agree.",flag:"recordMismatch",flagValue:"true"},
-{id:"run_archive",trigger:"time",minutes:4,app:"TRACE: RUN",requires:"record_mismatch",phase:1,notification:"TRACE: RUN accessed archived session data.",clue:"The game is reading data it should not have.",flag:"runArchive",flagValue:"true"},
-{id:"maya_contact",trigger:"time",minutes:6,app:"System",requires:"run_archive",phase:2,notification:"Incoming local session.",clue:"A second consciousness signature is active.",flag:"mayaUnlocked",flagValue:"true"}
+const $=id=>document.getElementById(id);
+let events=[
+{id:"Player enters their name",time:0,app:"System",notice:"Welcome back.",clue:"The computer already seems to know the session."},
+{id:"A strange file appears",time:1,app:"Files",notice:"File activity detected.",clue:"A file appeared without being created."},
+{id:"Maya is mentioned",time:2,app:"Browser",notice:"A local record mentions Maya Reyes.",clue:"The name is connected to TRACE-143207."},
+{id:"Two records contradict each other",time:3,app:"Files",notice:"Session record mismatch detected.",clue:"The records disagree about who the user is."},
+{id:"TRACE: RUN reads archived data",time:4,app:"TRACE: RUN",notice:"Archived session data accessed.",clue:"The game is reading something it should not have."},
+{id:"Someone contacts the session",time:6,app:"System",notice:"Incoming local session.",clue:"A second consciousness signature is active."}
 ];
+let editing=-1,timer=null,running=false,start=0;
 
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
-function cleanId(s){const x=String(s||"").trim().replace(/[^a-z0-9_]/gi,"_").slice(0,40);return x||"";}
-function readForm(){return{id:cleanId($("eventId").value)||"new_event",trigger:$("trigger").value,minutes:Math.max(0,Math.min(120,Number($("minutes").value)||0)),app:$("appName").value,requires:cleanId($("requires").value),phase:Math.max(0,Math.min(99,Number($("phase").value)||0)),notification:$("notification").value.trim(),clue:$("clue").value.trim(),flag:cleanId($("flag").value),flagValue:$("flagValue").value.trim()||"true"}}
-function eventCode(e){return 'TRACE_STORY_EVENTS.push('+JSON.stringify(e,null,2)+');'}
-function storyJson(){return{version:2,name:"TRACE Story",generatedBy:"TRACE DevKit",events:events.map(e=>({...e}))}}
-function storyJs(){return 'window.TRACE_STORY_PROJECT='+JSON.stringify(storyJson(),null,2)+';\nconst TRACE_STORY_EVENTS=window.TRACE_STORY_PROJECT.events;'}
-function toast(t){$("toast").textContent=t;setTimeout(()=>{if($("toast").textContent===t)$("toast").textContent=""},2200)}
-function saveSilently(){try{localStorage.setItem(KEY,JSON.stringify(storyJson()))}catch(e){}}
-function loadSaved(){try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x&&Array.isArray(x.events)){events=x.events;return true}}catch(e){}return false}
-function renderEvents(){
-$("eventCount").textContent=events.length+" event"+(events.length===1?"":"s");
-$("events").innerHTML=events.length?events.map((e,i)=>'<article class="event"><h3>'+escapeHtml(e.id)+'</h3><div><span class="pill">'+escapeHtml(e.trigger)+'</span><span class="pill">'+e.minutes+' min</span><span class="pill">phase '+e.phase+'</span></div><p class="muted">'+escapeHtml(e.app)+' · '+escapeHtml(e.notification||"No notification")+'</p><p>'+escapeHtml(e.clue||"No clue")+'</p><div class="actions"><button class="smallbtn" data-edit="'+i+'">Edit</button><button class="smallbtn danger" data-delete="'+i+'">Delete</button></div></article>').join(""):'<p class="muted">No events yet.</p>';
-$("events").querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{events.splice(Number(b.dataset.delete),1);renderAll();});
-$("events").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{const e=events[Number(b.dataset.edit)];["eventId","requires","notification","clue","flag","flagValue"].forEach(id=>$(id).value=e[id]||"");$("trigger").value=e.trigger;$("minutes").value=e.minutes;$("appName").value=e.app;$("phase").value=e.phase;switchTab("builder");toast("Event loaded into builder.")});
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}
+function render(){
+const t=$("timeline");
+if(!events.length){t.innerHTML='<div class="empty">No story moments yet. Add one below.</div>';return}
+t.innerHTML=events.map((e,i)=>'<div class="event"><div class="num">'+(i+1)+'</div><div><b>'+esc(e.id)+'</b><div class="meta">'+e.time+' min · '+esc(e.app)+' · '+esc(e.notice)+'</div></div><div><button data-edit="'+i+'">EDIT</button> <button data-del="'+i+'" class="danger">DELETE</button></div></div>').join("");
+t.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(+b.dataset.edit));
+t.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{events.splice(+b.dataset.del,1);render();debug();});
 }
-function renderFlow(){
-const sorted=[...events].sort((a,b)=>a.minutes-b.minutes);
-$("flow").innerHTML=sorted.length?sorted.map((e,i)=>(i?'<div class="arrow">→</div>':'')+'<div class="node"><b>'+escapeHtml(e.id)+'</b><div class="muted">'+e.minutes+' min · '+escapeHtml(e.app)+'</div>'+(e.requires?'<div class="pill">requires '+escapeHtml(e.requires)+'</div>':'')+'</div>').join(""):'<p class="muted">Add events to see the story path.</p>';
+function openEdit(i){
+editing=i;$("modalTitle").textContent=i<0?"New story moment":"Edit story moment";
+const e=i<0?{id:"",time:0,app:"Files",notice:"",clue:""}:events[i];
+$("fTitle").value=e.id;$("fTime").value=e.time;$("fApp").value=e.app;$("fNotice").value=e.notice;$("fClue").value=e.clue;$("modal").classList.add("show");$("fTitle").focus();
 }
-function renderChecklist(){
-const ids=new Set(events.map(e=>e.id));
-const checks=[["IDENTITY","Player enters a name","identity"],["UNEASE","First anomaly","unease_01"],["MAYA REF","Maya reference","maya_reference"],["RECORD","Record contradiction","record_mismatch"],["ARCHIVE","Archive clue","run_archive"],["MAYA","Maya contact","maya_contact"],["REVEAL","Identity reveal","identity_reveal"]];
-$("checklist").innerHTML=checks.map(c=>'<div class="event"><b class="'+(ids.has(c[2])?"ok":"warn")+'">'+(ids.has(c[2])?"✓ ":"○ ")+c[0]+'</b><div class="muted">'+c[1]+'</div></div>').join("");
+function close(){ $("modal").classList.remove("show");editing=-1 }
+$("add").onclick=()=>openEdit(-1);$("close").onclick=close;$("cancel").onclick=close;
+$("saveEvent").onclick=()=>{
+const title=$("fTitle").value.trim()||"Untitled story moment";
+const e={id:title,time:+$("fTime").value,app:$("fApp").value,notice:$("fNotice").value.trim()||title,clue:$("fClue").value.trim()||"No clue added."};
+if(editing<0)events.push(e);else events[editing]=e;
+events.sort((a,b)=>a.time-b.time);close();render();debug();
+};
+document.querySelectorAll("[data-screen]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(b.dataset.screen).classList.add("active");if(b.dataset.screen==="debug")debug();});
+function debug(){
+const out=$("debugList"),issues=[];
+const times=events.map(e=>e.time);
+for(let i=1;i<times.length;i++)if(times[i]<times[i-1])issues.push("Events are out of time order.");
+events.forEach((e,i)=>{if(!e.notice.trim())issues.push("Moment "+(i+1)+" has no player-facing message.");if(!e.clue.trim())issues.push("Moment "+(i+1)+" has no clue.");});
+if(events.length<3)issues.push("Only "+events.length+" moments. The test will still run, but the story is very short.");
+out.innerHTML=(issues.length?issues.map(x=>'<div class="debugrow bad">⚠ '+esc(x)+'</div>').join(""):'<div class="debugrow ok">✓ No basic problems found.</div>')+
+'<div class="debugrow"><b>'+events.length+'</b> story moments · <b>'+Math.max(0,...events.map(e=>e.time))+'</b> minute test length</div>';
 }
-function renderAll(){renderEvents();renderFlow();renderChecklist();$("saveState").textContent="Local project: "+events.length+" events";saveSilently()}
-function switchTab(name){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("hidden",v.id!==name))}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
-$("addEvent").onclick=()=>{const e=readForm(),idx=events.findIndex(x=>x.id===e.id);if(idx>=0)events[idx]=e;else events.push(e);renderAll();toast(idx>=0?"Event updated.":"Event added.")};
-$("previewEvent").onclick=()=>{$("output").value=eventCode(readForm());switchTab("export");toast("TRACE event code generated.")};
-$("clearForm").onclick=()=>{["eventId","requires","notification","clue","flag"].forEach(id=>$(id).value="");$("minutes").value=0;$("phase").value=1;$("flagValue").value="true"};
-$("exportJson").onclick=()=>{$("output").value=JSON.stringify(storyJson(),null,2);toast("TRACE story.json generated.")};
-$("exportJs").onclick=()=>{$("output").value=storyJs();toast("TRACE story.js generated.")};
-$("copyOut").onclick=async()=>{try{await navigator.clipboard.writeText($("output").value);toast("Output copied.")}catch(e){$("output").focus();$("output").select();toast("Output selected. Use Copy.")}};
-$("saveProject").onclick=()=>{saveSilently();$("projectStatus").textContent="Project saved on this device."};
-$("loadProject").onclick=()=>{if(loadSaved()){renderAll();$("projectStatus").textContent="Saved project loaded."}else $("projectStatus").textContent="No saved project found."};
-$("resetProject").onclick=()=>{if(confirm("Reset the DevKit project?")){events=[];renderAll();$("projectStatus").textContent="Project reset."}};
-function log(t){const p=document.createElement("div");p.textContent=t;$("simLog").appendChild(p)}
-function eligible(e){return !sim.fired.has(e.id)&&e.phase<=sim.phase&&(e.requires===""||sim.fired.has(e.requires))}
-function simStep(){
-sim.minute=Math.min(120,sim.minute+.5);
-let progressed=true,guard=0;
-while(progressed&&guard++<events.length+1){progressed=false;events.slice().sort((a,b)=>a.minutes-b.minutes).forEach(e=>{if(eligible(e)&&e.trigger==="time"&&sim.minute>=e.minutes){sim.fired.add(e.id);sim.phase=Math.max(sim.phase,e.phase);progressed=true;log("["+String(Math.floor(sim.minute)).padStart(2,"0")+":"+String(Math.round((sim.minute%1)*60)).padStart(2,"0")+"] "+e.id+" → "+(e.notification||e.app))}})}
-$("simClock").textContent=String(Math.floor(sim.minute)).padStart(2,"0")+":"+String(Math.round((sim.minute%1)*60)).padStart(2,"0");
+function stop(){clearInterval(timer);timer=null;running=false}
+function renderPlay(i){
+const e=events[i];$("playNotice").innerHTML='<strong>'+esc(e.app)+'</strong>'+esc(e.notice);$("playLog").textContent="["+e.time+":00] "+e.id+" → "+e.clue;
+$("playTime").textContent="T+"+e.time+"m";
 }
-$("startSim").onclick=()=>{if(sim.running)return;sim.minute=Math.max(0,Number($("simMinutes").value)||0);sim.phase=Math.max(0,Number($("simPhase").value)||0);sim.fired=new Set();$("simLog").innerHTML="";sim.running=true;sim.timer=setInterval(simStep,500);toast("Simulation running.")};
-$("stepSim").onclick=()=>{if(!sim.running)simStep()};
-$("resetSim").onclick=()=>{clearInterval(sim.timer);sim={minute:0,phase:Math.max(0,Number($("simPhase").value)||0),fired:new Set(),running:false,timer:null};$("simClock").textContent="00:00";$("simLog").innerHTML=""};
-if(!loadSaved())events=defaults;
-renderAll();
+function play(){
+stop();if(!events.length)return;
+let i=0;start=performance.now();renderPlay(0);running=true;
+timer=setInterval(()=>{
+const elapsed=(performance.now()-start)/1000;
+while(i+1<events.length && elapsed>=events[i+1].time*2){i++;renderPlay(i)}
+if(i>=events.length-1){stop();$("playLog").textContent+="  |  TEST COMPLETE"}
+},200);
+}
+$("playStory").onclick=play;$("stopStory").onclick=stop;
+$("resetTest").onclick=()=>{stop();renderPlay(0);$("playLog").textContent="Test reset. Waiting...";};
+render();debug();
 })();
 </script>
 </body>
