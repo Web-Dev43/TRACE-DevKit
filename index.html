@@ -22,24 +22,36 @@ main{width:min(1100px,100%);margin:auto;padding:18px}.top{display:flex;justify-c
 
 <section id="builder" class="view">
 <div class="panel">
-<h2>Event Builder</h2>
-<div class="grid">
-<label>Event ID<input id="eventId" value="archive_found" maxlength="40"></label>
-<label>Trigger<select id="trigger"><option value="time">After time</option><option value="app">On app open</option><option value="file">On file discovered</option><option value="clue">On clue count</option><option value="flag">When flag is set</option><option value="manual">Manual</option></select></label>
-<label>Minutes<input id="minutes" type="number" min="0" max="120" value="2"></label>
-<label>App<select id="appName"><option>Files</option><option>Browser</option><option>TRACE: RUN</option><option>Notes</option><option>Calculator</option><option>System</option></select></label>
-<label>Requires event ID<input id="requires" placeholder="optional"></label>
-<label>Phase<input id="phase" type="number" min="0" max="99" value="1"></label>
+<h2>🧩 Build your story</h2>
+<p class="muted">You only need to answer 5 simple questions. DevKit handles the technical stuff for you.</p>
+<div class="panel" style="background:#081218;margin:12px 0 0">
+<h3>1. What happens?</h3>
+<label><input id="eventId" value="archive_found" maxlength="40" placeholder="Example: A strange file appears"></label>
 </div>
 <div class="grid" style="margin-top:10px">
-<label>Notification<input id="notification" value="A new archived record is available."></label>
-<label>Clue<input id="clue" value="The archive references an unresolved user record."></label>
-<label>Hidden flag<input id="flag" placeholder="e.g. archiveSeen"></label>
-<label>Flag value<input id="flagValue" value="true"></label>
+<label>2. When does it happen?
+<select id="trigger"><option value="time">After time</option></select>
+<select id="minutes" style="margin-top:7px">
+<option value="0">Right away</option><option value="1">After 1 minute</option><option value="2">After 2 minutes</option><option value="3">After 3 minutes</option><option value="4">After 4 minutes</option><option value="5">After 5 minutes</option><option value="6">After 6 minutes</option><option value="7">After 7 minutes</option><option value="10">After 10 minutes</option>
+</select></label>
+<label>3. Where?
+<select id="appName"><option>Files</option><option>Browser</option><option>TRACE: RUN</option><option>Notes</option><option>Calculator</option><option>System</option></select></label>
+<label>4. What should the player see?
+<input id="notification" placeholder="Example: File activity detected"></label>
+<label>5. What clue does it add?
+<input id="clue" placeholder="Example: The file was not created by you."></label>
 </div>
-<div class="actions"><button class="primary" id="addEvent">Add event</button><button id="previewEvent">Preview TRACE code</button><button id="clearForm">Clear</button></div>
+<input id="requires" type="hidden">
+<input id="phase" type="hidden" value="1">
+<input id="flag" type="hidden">
+<input id="flagValue" type="hidden" value="true">
+<div class="actions"><button class="primary" id="addEvent">＋ Add story moment</button><button id="clearForm">Clear</button></div>
 </div>
-<div class="panel"><h2>Events <span id="eventCount" class="muted"></span></h2><div id="events" class="cards"></div></div>
+<div class="panel">
+<h2>📖 Your story <span id="eventCount" class="muted"></span></h2>
+<p class="muted">Add moments above. They automatically get connected in order.</p>
+<div id="events" class="cards"></div>
+</div>
 </section>
 
 <section id="story" class="view hidden">
