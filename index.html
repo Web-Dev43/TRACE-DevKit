@@ -85,7 +85,7 @@ const defaults=[
 {id:"maya_contact",trigger:"time",minutes:6,app:"System",requires:"run_archive",phase:2,notification:"Incoming local session.",clue:"A second consciousness signature is active.",flag:"mayaUnlocked",flagValue:"true"}
 ];
 
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#39;"}[c]));}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
 function cleanId(s){const x=String(s||"").trim().replace(/[^a-z0-9_]/gi,"_").slice(0,40);return x||"";}
 function readForm(){return{id:cleanId($("eventId").value)||"new_event",trigger:$("trigger").value,minutes:Math.max(0,Math.min(120,Number($("minutes").value)||0)),app:$("appName").value,requires:cleanId($("requires").value),phase:Math.max(0,Math.min(99,Number($("phase").value)||0)),notification:$("notification").value.trim(),clue:$("clue").value.trim(),flag:cleanId($("flag").value),flagValue:$("flagValue").value.trim()||"true"}}
 function eventCode(e){return 'TRACE_STORY_EVENTS.push('+JSON.stringify(e,null,2)+');'}
