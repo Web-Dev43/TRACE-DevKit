@@ -12,7 +12,7 @@
 </head>
 <body>
 <main class="app" id="app">
-<header class="head"><div><div class="logo">TRACE BUILDER</div><div class="sub">Test the story before it goes into TRACE OS.</div></div><div class="topbuttons"><button data-screen="edit" class="primary">EDIT</button><button data-screen="play">PLAY</button><button data-screen="debug">DEBUG</button></div></header>
+<header class="head"><div><div class="logo">TRACE BUILDER</div><div class="sub">Test the story before it goes into TRACE OS.</div></div><div class="topbuttons"><button type="button" data-screen="edit" class="primary">EDIT</button><button type="button" data-screen="play">PLAY</button><button type="button" data-screen="debug">DEBUG</button></div></header>
 
 <section id="edit" class="screen active">
 <div class="editor">
@@ -35,7 +35,7 @@
 <div id="playNotice" class="notice"><strong>SYSTEM</strong>Press PLAY STORY to begin the test.</div>
 </div>
 </div>
-<div class="actions"><button id="playStory" class="primary">▶ PLAY STORY</button><button id="stopStory">STOP</button><button id="resetTest">RESET TEST</button></div>
+<div class="actions"><button type="button" id="playStory" class="primary">▶ PLAY STORY</button><button type="button" id="stopStory">STOP</button><button type="button" id="resetTest">RESET TEST</button></div>
 <div id="playLog" class="playlog">Waiting for test...</div>
 </section>
 
@@ -94,7 +94,7 @@ const e={id:title,time:+$("fTime").value,app:$("fApp").value,notice:$("fNotice")
 if(editing<0)events.push(e);else events[editing]=e;
 events.sort((a,b)=>a.time-b.time);close();render();debug();
 };
-document.querySelectorAll("[data-screen]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(b.dataset.screen).classList.add("active");if(b.dataset.screen==="debug")debug();});
+document.querySelectorAll("[data-screen]").forEach(b=>b.addEventListener("click",function(ev){ev.preventDefault();const target=this.getAttribute("data-screen");document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));const screen=document.getElementById(target);if(screen)screen.classList.add("active");if(target==="play"){stop();$( "playTime" ).textContent="TEST SESSION";}if(target==="debug")debug();}));
 function debug(){
 const out=$("debugList"),issues=[];
 const times=events.map(e=>e.time);
@@ -110,7 +110,8 @@ const e=events[i];$("playNotice").innerHTML='<strong>'+esc(e.app)+'</strong>'+es
 $("playTime").textContent="T+"+e.time+"m";
 }
 function play(){
-stop();if(!events.length)return;
+stop();if(!events.length){$("playLog").textContent="No story moments to play. Add a story moment in EDIT.";return;}
+$( "playTime" ).textContent="T+0m";
 let i=0;start=performance.now();renderPlay(0);running=true;
 timer=setInterval(()=>{
 const elapsed=(performance.now()-start)/1000;
@@ -118,7 +119,7 @@ while(i+1<events.length && elapsed>=events[i+1].time*2){i++;renderPlay(i)}
 if(i>=events.length-1){stop();$("playLog").textContent+="  |  TEST COMPLETE"}
 },200);
 }
-$("playStory").onclick=play;$("stopStory").onclick=stop;
+$("playStory").addEventListener("click",function(ev){ev.preventDefault();play();});$("stopStory").addEventListener("click",function(ev){ev.preventDefault();stop();});
 $("resetTest").onclick=()=>{stop();renderPlay(0);$("playLog").textContent="Test reset. Waiting...";};
 render();debug();
 })();
