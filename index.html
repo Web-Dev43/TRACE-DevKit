@@ -9,18 +9,15 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
 main{width:min(1100px,100%);margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.brand{font-weight:800;letter-spacing:.16em;font-size:24px}.sub{color:var(--muted);font-size:13px;margin-top:4px}
 .tabs{display:flex;gap:6px;overflow:auto;margin:18px 0 12px}.tab,button{border:1px solid #415762;background:#14232b;color:#fff;border-radius:8px;padding:10px 13px;font:inherit;cursor:pointer}.tab.active{background:#203a42;border-color:#67818b}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}label{display:block;font-size:12px;color:var(--muted)}input,select,textarea{width:100%;margin-top:6px;background:#081218;color:#fff;border:1px solid #31434c;border-radius:7px;padding:10px;font:inherit}textarea{min-height:170px;font-family:ui-monospace,SFMono-Regular,monospace;resize:vertical}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.primary{border-color:#668c7d;background:#19332d}.danger{border-color:#815b5b}.muted{color:var(--muted);font-size:13px}.hidden{display:none!important}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px}.event{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px}.event h3{margin:0 0 5px;font-size:15px}.pill{display:inline-block;border:1px solid #3b515b;border-radius:999px;padding:3px 7px;font-size:11px;color:var(--muted);margin:2px}.ok{color:var(--accent)}.warn{color:#e0b77e}.error{color:var(--danger)}.flow{display:flex;gap:8px;overflow:auto;padding:8px 2px}.node{min-width:150px;background:#101c23;border:1px solid #31434c;border-radius:9px;padding:10px}.arrow{align-self:center;color:var(--muted)}pre{white-space:pre-wrap;word-break:break-word}.smallbtn{padding:7px 9px;font-size:12px}@media(max-width:600px){main{padding:12px}.grid{grid-template-columns:1fr}.top{display:block}.tabs{margin-top:12px}.panel{padding:12px}}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}label{display:block;font-size:12px;color:var(--muted)}input,select,textarea{width:100%;margin-top:6px;background:#081218;color:#fff;border:1px solid #31434c;border-radius:7px;padding:10px;font:inherit}textarea{min-height:170px;font-family:ui-monospace,SFMono-Regular,monospace;resize:vertical}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.primary{border-color:#668c7d;background:#19332d}.danger{border-color:#815b5b}.muted{color:var(--muted);font-size:13px}.hidden{display:none!important}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px}.event{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px}.event h3{margin:0 0 5px;font-size:15px}.pill{display:inline-block;border:1px solid #3b515b;border-radius:999px;padding:3px 7px;font-size:11px;color:var(--muted);margin:2px}.ok{color:var(--accent)}.warn{color:#e0b77e}.error{color:var(--danger)}.flow{display:flex;gap:8px;overflow:auto;padding:8px 2px}.node{min-width:150px;background:#101c23;border:1px solid #31434c;border-radius:9px;padding:10px}.arrow{align-self:center;color:var(--muted)}.smallbtn{padding:7px 9px;font-size:12px}.dropzone{border:1px dashed #49606a;border-radius:8px;padding:12px;text-align:center;color:var(--muted);margin-top:10px}.codehint{font:12px ui-monospace,monospace;color:#b7c7cd;white-space:pre-wrap;background:#081218;border:1px solid var(--border);padding:10px;border-radius:8px}
+@media(max-width:600px){main{padding:12px}.grid{grid-template-columns:1fr}.top{display:block}.tabs{margin-top:12px}.panel{padding:12px}}
 </style>
 </head>
 <body>
 <main id="app">
 <div class="top"><div><div class="brand">TRACE DEVKIT</div><div class="sub">Build, simulate, debug, and export story logic without hand-editing the main game.</div></div><div id="saveState" class="muted">Local project: ready</div></div>
-
 <div class="tabs">
-<button class="tab active" data-tab="builder">Builder</button>
-<button class="tab" data-tab="story">Story Flow</button>
-<button class="tab" data-tab="simulate">Simulator</button>
-<button class="tab" data-tab="export">Export</button>
+<button class="tab active" data-tab="builder">Builder</button><button class="tab" data-tab="story">Story Flow</button><button class="tab" data-tab="simulate">Simulator</button><button class="tab" data-tab="export">Export</button>
 </div>
 
 <section id="builder" class="view">
@@ -28,7 +25,7 @@ main{width:min(1100px,100%);margin:auto;padding:18px}.top{display:flex;justify-c
 <h2>Event Builder</h2>
 <div class="grid">
 <label>Event ID<input id="eventId" value="archive_found" maxlength="40"></label>
-<label>Trigger<select id="trigger"><option value="time">After time</option><option value="app">On app open</option><option value="file">On file discovered</option><option value="clue">On clue count</option><option value="manual">Manual</option></select></label>
+<label>Trigger<select id="trigger"><option value="time">After time</option><option value="app">On app open</option><option value="file">On file discovered</option><option value="clue">On clue count</option><option value="flag">When flag is set</option><option value="manual">Manual</option></select></label>
 <label>Minutes<input id="minutes" type="number" min="0" max="120" value="2"></label>
 <label>App<select id="appName"><option>Files</option><option>Browser</option><option>TRACE: RUN</option><option>Notes</option><option>Calculator</option><option>System</option></select></label>
 <label>Requires event ID<input id="requires" placeholder="optional"></label>
@@ -40,37 +37,42 @@ main{width:min(1100px,100%);margin:auto;padding:18px}.top{display:flex;justify-c
 <label>Hidden flag<input id="flag" placeholder="e.g. archiveSeen"></label>
 <label>Flag value<input id="flagValue" value="true"></label>
 </div>
-<div class="actions"><button class="primary" id="addEvent">Add event</button><button id="previewEvent">Preview code</button><button id="clearForm">Clear</button></div>
+<div class="actions"><button class="primary" id="addEvent">Add event</button><button id="previewEvent">Preview TRACE code</button><button id="clearForm">Clear</button></div>
 </div>
 <div class="panel"><h2>Events <span id="eventCount" class="muted"></span></h2><div id="events" class="cards"></div></div>
 </section>
 
 <section id="story" class="view hidden">
-<div class="panel"><h2>Story Flow</h2><p class="muted">Events are connected by requirements. This is the fast visual check for pacing and dependencies.</p><div id="flow" class="flow"></div></div>
+<div class="panel"><h2>Story Flow</h2><p class="muted">Events are connected by requirements. The flow is sorted by time so pacing problems are obvious.</p><div id="flow" class="flow"></div></div>
 <div class="panel"><h2>Checklist</h2><div id="checklist" class="cards"></div></div>
 </section>
 
 <section id="simulate" class="view hidden">
-<div class="panel"><h2>Story Simulator</h2><p class="muted">Run the current project locally. Time advances in accelerated steps so you can test a seven-minute sequence quickly.</p>
+<div class="panel"><h2>Story Simulator</h2><p class="muted">Run your current sequence locally. One half-second advances 30 story seconds.</p>
 <div class="grid"><label>Start phase<input id="simPhase" type="number" min="0" max="99" value="0"></label><label>Starting minutes<input id="simMinutes" type="number" min="0" max="120" value="0"></label></div>
 <div class="actions"><button class="primary" id="startSim">Start simulation</button><button id="stepSim">Advance 30 sec</button><button id="resetSim">Reset</button></div>
 <p id="simClock" class="ok">00:00</p><div id="simLog" class="panel" style="margin:8px 0 0;background:#081218"></div></div>
 </section>
 
 <section id="export" class="view hidden">
-<div class="panel"><h2>Export Project</h2><p class="muted">Generate a self-contained story definition you can adapt into TRACE or another project.</p>
-<div class="actions"><button class="primary" id="exportJson">Generate JSON</button><button id="exportJs">Generate JS</button><button id="selectOut">Select output</button></div>
+<div class="panel"><h2>TRACE Export</h2><p class="muted">Generate a drop-in story project for TRACE OS. This output is designed to replace a hand-maintained event list.</p>
+<div class="actions"><button class="primary" id="exportJson">TRACE story.json</button><button id="exportJs">TRACE story.js</button><button id="copyOut">Copy output</button></div>
 <textarea id="output" spellcheck="false"></textarea>
+<div class="codehint">TRACE integration:
+1. Export story.js.
+2. Add the generated file beside app.js.
+3. Load it before app.js.
+4. Call TRACE_STORY_EVENTS from your story engine.
+
+The DevKit keeps story data separate from gameplay code, so story changes stop touching the Tetris/UI systems.</div>
 </div>
 <div class="panel"><h2>Project tools</h2><div class="actions"><button id="saveProject">Save project</button><button id="loadProject">Load saved project</button><button class="danger" id="resetProject">Reset project</button></div><p id="projectStatus" class="muted"></p></div>
 </section>
-
 <div id="toast" class="muted" aria-live="polite"></div>
 </main>
 <script>
 (function(){
-const $=id=>document.getElementById(id);
-const KEY="trace_devkit_project_v1";
+const $=id=>document.getElementById(id),KEY="trace_devkit_project_v2";
 let events=[];
 let sim={minute:0,phase:0,fired:new Set(),running:false,timer:null};
 
@@ -83,16 +85,20 @@ const defaults=[
 {id:"maya_contact",trigger:"time",minutes:6,app:"System",requires:"run_archive",phase:2,notification:"Incoming local session.",clue:"A second consciousness signature is active.",flag:"mayaUnlocked",flagValue:"true"}
 ];
 
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&#92;",""":"&quot;","'":"&#39;"}[c]));}
-function cleanId(s){return String(s||"new_event").trim().replace(/[^a-z0-9_]/gi,"_").slice(0,40)||"new_event";}
-function readForm(){return{id:cleanId($("eventId").value),trigger:$("trigger").value,minutes:Math.max(0,Math.min(120,Number($("minutes").value)||0)),app:$("appName").value,requires:cleanId($("requires").value)||"",phase:Math.max(0,Math.min(99,Number($("phase").value)||0)),notification:$("notification").value.trim(),clue:$("clue").value.trim(),flag:cleanId($("flag").value)||"",flagValue:$("flagValue").value.trim()||"true"}}
-function eventCode(e){return 'story.event('+JSON.stringify(e.id)+', '+JSON.stringify({trigger:e.trigger,afterMinutes:e.minutes,app:e.app,requires:e.requires||undefined,phase:e.phase,notification:e.notification,clue:e.clue,flag:e.flag||undefined,flagValue:e.flagValue},null,2)+');'}
-function toast(t){$("toast").textContent=t;setTimeout(()=>{if($("toast").textContent===t)$("toast").textContent=""},2500)}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#39;"}[c]));}
+function cleanId(s){const x=String(s||"").trim().replace(/[^a-z0-9_]/gi,"_").slice(0,40);return x||"";}
+function readForm(){return{id:cleanId($("eventId").value)||"new_event",trigger:$("trigger").value,minutes:Math.max(0,Math.min(120,Number($("minutes").value)||0)),app:$("appName").value,requires:cleanId($("requires").value),phase:Math.max(0,Math.min(99,Number($("phase").value)||0)),notification:$("notification").value.trim(),clue:$("clue").value.trim(),flag:cleanId($("flag").value),flagValue:$("flagValue").value.trim()||"true"}}
+function eventCode(e){return 'TRACE_STORY_EVENTS.push('+JSON.stringify(e,null,2)+');'}
+function storyJson(){return{version:2,name:"TRACE Story",generatedBy:"TRACE DevKit",events:events.map(e=>({...e}))}}
+function storyJs(){return 'window.TRACE_STORY_PROJECT='+JSON.stringify(storyJson(),null,2)+';\nconst TRACE_STORY_EVENTS=window.TRACE_STORY_PROJECT.events;'}
+function toast(t){$("toast").textContent=t;setTimeout(()=>{if($("toast").textContent===t)$("toast").textContent=""},2200)}
+function saveSilently(){try{localStorage.setItem(KEY,JSON.stringify(storyJson()))}catch(e){}}
+function loadSaved(){try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x&&Array.isArray(x.events)){events=x.events;return true}}catch(e){}return false}
 function renderEvents(){
 $("eventCount").textContent=events.length+" event"+(events.length===1?"":"s");
 $("events").innerHTML=events.length?events.map((e,i)=>'<article class="event"><h3>'+escapeHtml(e.id)+'</h3><div><span class="pill">'+escapeHtml(e.trigger)+'</span><span class="pill">'+e.minutes+' min</span><span class="pill">phase '+e.phase+'</span></div><p class="muted">'+escapeHtml(e.app)+' · '+escapeHtml(e.notification||"No notification")+'</p><p>'+escapeHtml(e.clue||"No clue")+'</p><div class="actions"><button class="smallbtn" data-edit="'+i+'">Edit</button><button class="smallbtn danger" data-delete="'+i+'">Delete</button></div></article>').join(""):'<p class="muted">No events yet.</p>';
 $("events").querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{events.splice(Number(b.dataset.delete),1);renderAll();});
-$("events").querySelectorAll("[data-edit]").forEach(b=>{b.onclick=()=>{const e=events[Number(b.dataset.edit)];$("eventId").value=e.id;$("trigger").value=e.trigger;$("minutes").value=e.minutes;$("appName").value=e.app;$("requires").value=e.requires;$("phase").value=e.phase;$("notification").value=e.notification;$("clue").value=e.clue;$("flag").value=e.flag;$("flagValue").value=e.flagValue;switchTab("builder");toast("Event loaded into builder.")}});
+$("events").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{const e=events[Number(b.dataset.edit)];["eventId","requires","notification","clue","flag","flagValue"].forEach(id=>$(id).value=e[id]||"");$("trigger").value=e.trigger;$("minutes").value=e.minutes;$("appName").value=e.app;$("phase").value=e.phase;switchTab("builder");toast("Event loaded into builder.")});
 }
 function renderFlow(){
 const sorted=[...events].sort((a,b)=>a.minutes-b.minutes);
@@ -100,20 +106,18 @@ $("flow").innerHTML=sorted.length?sorted.map((e,i)=>(i?'<div class="arrow">→</
 }
 function renderChecklist(){
 const ids=new Set(events.map(e=>e.id));
-const checks=[["IDENTITY","Player enters a name","identity"],["UNEASE","First anomaly","unease_01"],["ARCHIVE","Archive clue","run_archive"],["RECORD","Record contradiction","record_mismatch"],["MAYA","Maya contact","maya_contact"],["REVEAL","Identity reveal","identity_reveal"]];
+const checks=[["IDENTITY","Player enters a name","identity"],["UNEASE","First anomaly","unease_01"],["MAYA REF","Maya reference","maya_reference"],["RECORD","Record contradiction","record_mismatch"],["ARCHIVE","Archive clue","run_archive"],["MAYA","Maya contact","maya_contact"],["REVEAL","Identity reveal","identity_reveal"]];
 $("checklist").innerHTML=checks.map(c=>'<div class="event"><b class="'+(ids.has(c[2])?"ok":"warn")+'">'+(ids.has(c[2])?"✓ ":"○ ")+c[0]+'</b><div class="muted">'+c[1]+'</div></div>').join("");
 }
-function renderAll(){renderEvents();renderFlow();renderChecklist();$("saveState").textContent="Local project: "+events.length+" events";saveSilently();}
-function saveSilently(){try{localStorage.setItem(KEY,JSON.stringify({version:1,events}))}catch(e){}}
-function loadSaved(){try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x&&Array.isArray(x.events)){events=x.events;return true}}catch(e){}return false}
+function renderAll(){renderEvents();renderFlow();renderChecklist();$("saveState").textContent="Local project: "+events.length+" events";saveSilently()}
 function switchTab(name){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("hidden",v.id!==name))}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
-$("addEvent").onclick=()=>{const e=readForm();const existing=events.findIndex(x=>x.id===e.id);if(existing>=0)events[existing]=e;else events.push(e);renderAll();toast(existing>=0?"Event updated.":"Event added.")};
-$("previewEvent").onclick=()=>{$("output").value=eventCode(readForm());switchTab("export");toast("Preview generated.")};
+$("addEvent").onclick=()=>{const e=readForm(),idx=events.findIndex(x=>x.id===e.id);if(idx>=0)events[idx]=e;else events.push(e);renderAll();toast(idx>=0?"Event updated.":"Event added.")};
+$("previewEvent").onclick=()=>{$("output").value=eventCode(readForm());switchTab("export");toast("TRACE event code generated.")};
 $("clearForm").onclick=()=>{["eventId","requires","notification","clue","flag"].forEach(id=>$(id).value="");$("minutes").value=0;$("phase").value=1;$("flagValue").value="true"};
-$("exportJson").onclick=()=>{$("output").value=JSON.stringify({version:1,name:"TRACE Story",events},null,2);toast("JSON generated.")};
-$("exportJs").onclick=()=>{$("output").value='const STORY_PROJECT='+JSON.stringify({version:1,events},null,2)+';';toast("JavaScript generated.")};
-$("selectOut").onclick=()=>{$("output").focus();$("output").select();toast("Output selected. Use your browser's Copy command.")};
+$("exportJson").onclick=()=>{$("output").value=JSON.stringify(storyJson(),null,2);toast("TRACE story.json generated.")};
+$("exportJs").onclick=()=>{$("output").value=storyJs();toast("TRACE story.js generated.")};
+$("copyOut").onclick=async()=>{try{await navigator.clipboard.writeText($("output").value);toast("Output copied.")}catch(e){$("output").focus();$("output").select();toast("Output selected. Use Copy.")}};
 $("saveProject").onclick=()=>{saveSilently();$("projectStatus").textContent="Project saved on this device."};
 $("loadProject").onclick=()=>{if(loadSaved()){renderAll();$("projectStatus").textContent="Saved project loaded."}else $("projectStatus").textContent="No saved project found."};
 $("resetProject").onclick=()=>{if(confirm("Reset the DevKit project?")){events=[];renderAll();$("projectStatus").textContent="Project reset."}};
@@ -121,12 +125,13 @@ function log(t){const p=document.createElement("div");p.textContent=t;$("simLog"
 function eligible(e){return !sim.fired.has(e.id)&&e.phase<=sim.phase&&(e.requires===""||sim.fired.has(e.requires))}
 function simStep(){
 sim.minute=Math.min(120,sim.minute+.5);
-events.slice().sort((a,b)=>a.minutes-b.minutes).forEach(e=>{if(eligible(e)&&e.trigger==="time"&&sim.minute>=e.minutes){sim.fired.add(e.id);sim.phase=Math.max(sim.phase,e.phase);log("["+String(Math.floor(sim.minute)).padStart(2,"0")+":"+String(Math.round((sim.minute%1)*60)).padStart(2,"0")+"] "+e.id+" → "+(e.notification||e.app))}});
+let progressed=true,guard=0;
+while(progressed&&guard++<events.length+1){progressed=false;events.slice().sort((a,b)=>a.minutes-b.minutes).forEach(e=>{if(eligible(e)&&e.trigger==="time"&&sim.minute>=e.minutes){sim.fired.add(e.id);sim.phase=Math.max(sim.phase,e.phase);progressed=true;log("["+String(Math.floor(sim.minute)).padStart(2,"0")+":"+String(Math.round((sim.minute%1)*60)).padStart(2,"0")+"] "+e.id+" → "+(e.notification||e.app))}})}
 $("simClock").textContent=String(Math.floor(sim.minute)).padStart(2,"0")+":"+String(Math.round((sim.minute%1)*60)).padStart(2,"0");
 }
-$("startSim").onclick=()=>{if(sim.running)return;sim.minute=Number($("simMinutes").value)||0;sim.phase=Number($("simPhase").value)||0;sim.fired=new Set();$("simLog").innerHTML="";sim.running=true;sim.timer=setInterval(simStep,500);toast("Simulation running at 30 seconds per half-second.")};
-$("stepSim").onclick=()=>{if(sim.running)return;simStep()};
-$("resetSim").onclick=()=>{clearInterval(sim.timer);sim.running=false;sim={minute:0,phase:Number($("simPhase").value)||0,fired:new Set(),running:false,timer:null};$("simClock").textContent="00:00";$("simLog").innerHTML=""};
+$("startSim").onclick=()=>{if(sim.running)return;sim.minute=Math.max(0,Number($("simMinutes").value)||0);sim.phase=Math.max(0,Number($("simPhase").value)||0);sim.fired=new Set();$("simLog").innerHTML="";sim.running=true;sim.timer=setInterval(simStep,500);toast("Simulation running.")};
+$("stepSim").onclick=()=>{if(!sim.running)simStep()};
+$("resetSim").onclick=()=>{clearInterval(sim.timer);sim={minute:0,phase:Math.max(0,Number($("simPhase").value)||0),fired:new Set(),running:false,timer:null};$("simClock").textContent="00:00";$("simLog").innerHTML=""};
 if(!loadSaved())events=defaults;
 renderAll();
 })();
